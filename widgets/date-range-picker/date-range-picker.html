@@ -1,0 +1,75 @@
+<div class="date-range-picker-widget" ng-class="properties.cssClasses">
+  <div class="form-group" ng-class="{'has-error': properties.required && (!ctrl.startDate || !ctrl.endDate)}">
+    <label class="control-label" ng-if="properties.label">
+      {{ properties.label }}
+      <span ng-if="properties.required" class="text-danger">*</span>
+    </label>
+    
+    <div class="input-group date-range-container">
+      <div class="date-input-wrapper">
+        <input 
+          type="date" 
+          class="form-control start-date" 
+          ng-model="ctrl.startDate"
+          ng-disabled="properties.disabled"
+          min="{{properties.minDate}}"
+          max="{{ctrl.endDate || properties.maxDate}}"
+          placeholder="Start date"
+          ng-change="ctrl.updateDateRange()"
+          aria-label="Start date">
+      </div>
+      
+      <div class="date-separator">
+        <span class="separator-text">to</span>
+      </div>
+      
+      <div class="date-input-wrapper">
+        <input 
+          type="date" 
+          class="form-control end-date" 
+          ng-model="ctrl.endDate"
+          ng-disabled="properties.disabled"
+          min="{{ctrl.startDate || properties.minDate}}"
+          max="{{properties.maxDate}}"
+          placeholder="End date"
+          ng-change="ctrl.updateDateRange()"
+          aria-label="End date">
+      </div>
+      
+      <div class="input-group-btn">
+        <button 
+          type="button" 
+          class="btn btn-default clear-btn" 
+          ng-click="ctrl.clearDates()"
+          ng-disabled="properties.disabled || (!ctrl.startDate && !ctrl.endDate)"
+          title="Clear dates"
+          aria-label="Clear date selection">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Display formatted date range -->
+    <div class="date-range-display" ng-if="ctrl.startDate && ctrl.endDate">
+      <small class="text-muted">
+        Selected: {{ ctrl.formatDate(ctrl.startDate) }} - {{ ctrl.formatDate(ctrl.endDate) }}
+        <span class="duration-info">({{ ctrl.getDuration() }} days)</span>
+      </small>
+    </div>
+    
+    <!-- Validation message -->
+    <div class="help-block" ng-if="properties.required && (!ctrl.startDate || !ctrl.endDate)">
+      <small class="text-danger">Both start and end dates are required</small>
+    </div>
+    
+    <!-- Quick selection buttons -->
+    <div class="quick-select-buttons" ng-if="!properties.disabled">
+      <div class="btn-group btn-group-xs" role="group" aria-label="Quick date selections">
+        <button type="button" class="btn btn-default" ng-click="ctrl.selectLastWeek()">Last 7 days</button>
+        <button type="button" class="btn btn-default" ng-click="ctrl.selectLastMonth()">Last 30 days</button>
+        <button type="button" class="btn btn-default" ng-click="ctrl.selectThisMonth()">This month</button>
+        <button type="button" class="btn btn-default" ng-click="ctrl.selectLastThreeMonths()">Last 3 months</button>
+      </div>
+    </div>
+  </div>
+</div>

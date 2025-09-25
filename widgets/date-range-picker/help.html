@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Date Range Picker Widget Help</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        .header { background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .section { margin-bottom: 30px; }
+        .property-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .property-table th, .property-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .property-table th { background-color: #f2f2f2; }
+        .code { background: #f8f9fa; padding: 2px 4px; border-radius: 3px; font-family: monospace; }
+        .example { background: #e7f3ff; padding: 15px; border-radius: 5px; border-left: 4px solid #2196F3; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Date Range Picker Widget</h1>
+        <p>A comprehensive widget for selecting date ranges with an intuitive interface and additional features like quick selection buttons and validation.</p>
+    </div>
+
+    <div class="section">
+        <h2>Overview</h2>
+        <p>The Date Range Picker widget allows users to select a start and end date using native HTML5 date inputs, providing a consistent experience across different browsers and devices. It includes validation, formatting options, and convenient quick selection buttons.</p>
+    </div>
+
+    <div class="section">
+        <h2>Properties</h2>
+        <table class="property-table">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Default</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>startDate</code></td>
+                    <td>Variable</td>
+                    <td>Variable to store the selected start date (YYYY-MM-DD format)</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><code>endDate</code></td>
+                    <td>Variable</td>
+                    <td>Variable to store the selected end date (YYYY-MM-DD format)</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><code>dateFormat</code></td>
+                    <td>Choice</td>
+                    <td>Display format for dates: yyyy-MM-dd, dd/MM/yyyy, MM/dd/yyyy, dd-MM-yyyy</td>
+                    <td>yyyy-MM-dd</td>
+                </tr>
+                <tr>
+                    <td><code>placeholder</code></td>
+                    <td>Text</td>
+                    <td>Placeholder text when no date is selected</td>
+                    <td>"Select date range"</td>
+                </tr>
+                <tr>
+                    <td><code>minDate</code></td>
+                    <td>Text</td>
+                    <td>Minimum selectable date (YYYY-MM-DD format)</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><code>maxDate</code></td>
+                    <td>Text</td>
+                    <td>Maximum selectable date (YYYY-MM-DD format)</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><code>required</code></td>
+                    <td>Boolean</td>
+                    <td>Make the date range selection mandatory</td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td><code>disabled</code></td>
+                    <td>Boolean</td>
+                    <td>Disable the date range picker</td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td><code>cssClasses</code></td>
+                    <td>Text</td>
+                    <td>Additional CSS classes to apply to the widget</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Features</h2>
+        <ul>
+            <li><strong>Native Date Inputs:</strong> Uses HTML5 date inputs for consistent browser experience</li>
+            <li><strong>Date Validation:</strong> Automatically ensures start date is before end date</li>
+            <li><strong>Multiple Formats:</strong> Support for various date display formats</li>
+            <li><strong>Quick Selection:</strong> Buttons for common date ranges (Last 7 days, Last 30 days, etc.)</li>
+            <li><strong>Duration Display:</strong> Shows the number of days in the selected range</li>
+            <li><strong>Clear Function:</strong> Easy way to clear both dates</li>
+            <li><strong>Responsive Design:</strong> Adapts to different screen sizes</li>
+            <li><strong>Accessibility:</strong> Proper ARIA labels and keyboard navigation</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+        
+        <div class="example">
+            <h3>Basic Setup</h3>
+            <p>1. Create two variables in your form: <code>startDateVar</code> and <code>endDateVar</code></p>
+            <p>2. Add the Date Range Picker widget to your form</p>
+            <p>3. Bind the Start Date property to <code>startDateVar</code></p>
+            <p>4. Bind the End Date property to <code>endDateVar</code></p>
+        </div>
+
+        <div class="example">
+            <h3>With Validation</h3>
+            <p>Set the <code>required</code> property to <code>true</code> and optionally set <code>minDate</code> and <code>maxDate</code> to restrict the selectable date range.</p>
+            <p>Example: <code>minDate: "2023-01-01"</code>, <code>maxDate: "2024-12-31"</code></p>
+        </div>
+
+        <div class="example">
+            <h3>Custom Styling</h3>
+            <p>Use the <code>cssClasses</code> property to add custom CSS classes:</p>
+            <p><code>cssClasses: "my-custom-date-picker compact-layout"</code></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Data Binding</h2>
+        <p>The widget stores dates in ISO format (YYYY-MM-DD) in the bound variables, making them easy to use with:</p>
+        <ul>
+            <li>REST API calls</li>
+            <li>Database queries</li>
+            <li>Business data variables</li>
+            <li>Process variables</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Browser Compatibility</h2>
+        <p>This widget uses HTML5 date inputs and is compatible with:</p>
+        <ul>
+            <li>Chrome 20+</li>
+            <li>Firefox 57+</li>
+            <li>Safari 14.1+</li>
+            <li>Edge 12+</li>
+        </ul>
+        <p><strong>Note:</strong> For older browsers, the date inputs will fall back to text inputs.</p>
+    </div>
+
+    <div class="section">
+        <h2>Customization</h2>
+        <p>The widget can be customized using CSS. Key classes:</p>
+        <ul>
+            <li><code>.date-range-picker-widget</code> - Main container</li>
+            <li><code>.date-range-container</code> - Input container</li>
+            <li><code>.date-input-wrapper</code> - Individual date input wrapper</li>
+            <li><code>.date-range-display</code> - Selected range display</li>
+            <li><code>.quick-select-buttons</code> - Quick selection buttons container</li>
+        </ul>
+    </div>
+</body>
+</html>

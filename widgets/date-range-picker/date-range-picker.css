@@ -1,0 +1,233 @@
+/* Date Range Picker Widget Styles */
+.date-range-picker-widget {
+  width: 100%;
+  max-width: 600px;
+}
+
+.date-range-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.date-input-wrapper {
+  flex: 1;
+  min-width: 120px;
+}
+
+.date-input-wrapper input[type="date"] {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.date-input-wrapper input[type="date"]:focus {
+  border-color: #4CAF50;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.date-input-wrapper input[type="date"]:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.date-separator {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.separator-text {
+  color: #666;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.clear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.clear-btn:hover:not(:disabled) {
+  background-color: #f8f9fa;
+  border-color: #adb5bd;
+}
+
+.clear-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clear-btn i {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.date-range-display {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border-left: 3px solid #4CAF50;
+}
+
+.date-range-display .text-muted {
+  margin: 0;
+  font-size: 13px;
+}
+
+.duration-info {
+  font-weight: 500;
+  color: #495057;
+}
+
+.quick-select-buttons {
+  margin-top: 12px;
+}
+
+.quick-select-buttons .btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.quick-select-buttons .btn {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.quick-select-buttons .btn:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+/* Validation styles */
+.has-error .form-control {
+  border-color: #d9534f;
+}
+
+.has-error .form-control:focus {
+  border-color: #d9534f;
+  box-shadow: 0 0 0 2px rgba(217, 83, 79, 0.2);
+}
+
+.help-block {
+  margin-top: 5px;
+}
+
+.help-block .text-danger {
+  font-size: 12px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .date-range-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .date-input-wrapper {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .date-separator {
+    order: 1;
+    justify-content: center;
+    padding: 4px 0;
+  }
+  
+  .separator-text {
+    font-size: 12px;
+  }
+  
+  .clear-btn {
+    align-self: stretch;
+    justify-content: center;
+  }
+  
+  .quick-select-buttons .btn-group {
+    flex-direction: column;
+  }
+  
+  .quick-select-buttons .btn {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .date-range-picker-widget {
+    color: #e9ecef;
+  }
+  
+  .date-input-wrapper input[type="date"] {
+    background-color: #343a40;
+    border-color: #495057;
+    color: #e9ecef;
+  }
+  
+  .date-input-wrapper input[type="date"]:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+  }
+  
+  .clear-btn {
+    background-color: #343a40;
+    border-color: #495057;
+    color: #e9ecef;
+  }
+  
+  .clear-btn:hover:not(:disabled) {
+    background-color: #495057;
+  }
+  
+  .date-range-display {
+    background-color: #343a40;
+    border-left-color: #4CAF50;
+  }
+  
+  .separator-text {
+    color: #adb5bd;
+  }
+}
+
+/* Accessibility improvements */
+.date-range-picker-widget input:focus,
+.date-range-picker-widget button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .date-input-wrapper input[type="date"] {
+    border-width: 2px;
+  }
+  
+  .date-input-wrapper input[type="date"]:focus {
+    border-width: 3px;
+  }
+  
+  .clear-btn {
+    border-width: 2px;
+  }
+}

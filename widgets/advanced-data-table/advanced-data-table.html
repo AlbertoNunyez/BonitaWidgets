@@ -1,0 +1,193 @@
+<div class="advanced-data-table-widget" ng-class="properties.cssClasses">
+  <!-- Table Header with Controls -->
+  <div class="table-header">
+    <div class="table-controls">
+      <!-- Search Input -->
+      <div class="search-container" ng-if="properties.enableSearch">
+        <div class="input-group">
+          <input type="text" 
+                 class="form-control search-input" 
+                 ng-model="ctrl.searchQuery"
+                 placeholder="Search in table..."
+                 ng-change="ctrl.applyFilters()"
+                 aria-label="Search table data">
+          <div class="input-group-addon">
+            <i class="fa fa-search"></i>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Table Actions -->
+      <div class="table-actions">
+        <!-- Export Button -->
+        <button type="button" 
+                class="btn btn-default btn-sm export-btn"
+                ng-if="properties.enableExport"
+                ng-click="ctrl.exportToCsv()"
+                ng-disabled="!ctrl.filteredData || ctrl.filteredData.length === 0"
+                title="Export to CSV">
+          <i class="fa fa-download"></i> Export
+        </button>
+        
+        <!-- Selection Actions -->
+        <div class="selection-actions" ng-if="properties.enableSelection && ctrl.hasSelectedItems()">
+          <span class="selected-count">{{ ctrl.getSelectedCount() }} selected</span>
+          <button type="button" 
+                  class="btn btn-link btn-sm"
+                  ng-click="ctrl.clearSelection()"
+                  title="Clear selection">
+            <i class="fa fa-times"></i> Clear
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Results Info -->
+    <div class="results-info" ng-if="!properties.isLoading">
+      <small class="text-muted">
+        Showing {{ ctrl.getPaginationStart() }} to {{ ctrl.getPaginationEnd() }} of {{ ctrl.getTotalItems() }} entries
+        <span ng-if="ctrl.searchQuery">(filtered from {{ ctrl.originalData.length }} total entries)</span>
+      </small>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" ng-if="properties.isLoading">
+    <div class="spinner">
+      <i class="fa fa-spinner fa-spin fa-2x"></i>
+    </div>
+    <p class="loading-text">Loading data...</p>
+  </div>
+
+  <!-- Data Table -->
+  <div class="table-container" ng-if="!properties.isLoading">
+    <table class="table data-table"
+           ng-class="{
+             'table-striped': properties.stripedRows,
+             'table-hover': properties.hoverEffect,
+             'table-condensed': properties.compactMode
+           }">
+      <thead>
+        <tr>
+          <!-- Selection Header -->
+          <th ng-if="properties.enableSelection" class="selection-column">
+            <input type="checkbox" 
+                   ng-model="ctrl.selectAll"
+                   ng-change="ctrl.toggleSelectAll()"
+                   title="Select all visible rows">
+          </th>
+          
+          <!-- Row Numbers Header -->
+          <th ng-if="properties.showRowNumbers" class="row-number-column">#</th>
+          
+          <!-- Data Columns -->
+          <th ng-repeat="column in ctrl.getColumns()" 
+              ng-class="{'sortable': column.sortable, 'sorted': ctrl.sortColumn === column.key}"
+              ng-click="column.sortable && ctrl.sort(column.key)">
+            {{ column.label }}
+            <span class="sort-indicator" ng-if="column.sortable">
+              <i class="fa fa-sort" ng-if="ctrl.sortColumn !== column.key"></i>
+              <i class="fa fa-sort-up" ng-if="ctrl.sortColumn === column.key && !ctrl.sortReverse"></i>
+              <i class="fa fa-sort-down" ng-if="ctrl.sortColumn === column.key && ctrl.sortReverse"></i>
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data Rows -->
+        <tr ng-repeat="item in ctrl.getPaginatedData() track by $index"
+            ng-class="{'selected': ctrl.isSelected(item)}">
+          <!-- Selection Cell -->
+          <td ng-if="properties.enableSelection" class="selection-column">
+            <input type="checkbox" 
+                   ng-model="item._selected"
+                   ng-change="ctrl.toggleSelection(item)"
+                   title="Select this row">
+          </td>
+          
+          <!-- Row Number Cell -->
+          <td ng-if="properties.showRowNumbers" class="row-number-column">
+            {{ ctrl.getRowNumber($index) }}
+          </td>
+          
+          <!-- Data Cells -->
+          <td ng-repeat="column in ctrl.getColumns()" 
+              ng-class="'column-' + column.key">
+            <span ng-switch="column.type">
+              <span ng-switch-when="date">{{ ctrl.formatDate(item[column.key]) }}</span>
+              <span ng-switch-when="currency">{{ ctrl.formatCurrency(item[column.key]) }}</span>
+              <span ng-switch-when="number">{{ ctrl.formatNumber(item[column.key]) }}</span>
+              <span ng-switch-when="boolean">
+                <i class="fa" ng-class="item[column.key] ? 'fa-check text-success' : 'fa-times text-danger'"></i>
+              </span>
+              <span ng-switch-default>{{ item[column.key] }}</span>
+            </span>
+          </td>
+        </tr>
+        
+        <!-- Empty State -->
+        <tr ng-if="ctrl.isEmpty()">
+          <td colspan="{{ ctrl.getTotalColumns() }}" class="empty-state">
+            <div class="empty-message">
+              <i class="fa fa-table fa-2x text-muted"></i>
+              <p>{{ properties.emptyMessage }}</p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-container" ng-if="!properties.isLoading && !ctrl.isEmpty()">
+    <div class="pagination-info">
+      <select class="form-control items-per-page-select"
+              ng-model="ctrl.itemsPerPage"
+              ng-change="ctrl.updatePagination()">
+        <option value="5">5 per page</option>
+        <option value="10">10 per page</option>
+        <option value="25">25 per page</option>
+        <option value="50">50 per page</option>
+        <option value="100">100 per page</option>
+      </select>
+    </div>
+    
+    <nav class="pagination-nav" aria-label="Table pagination">
+      <ul class="pagination pagination-sm">
+        <!-- First Page -->
+        <li ng-class="{disabled: ctrl.currentPage === 1}">
+          <a href="#" ng-click="ctrl.goToPage(1)" aria-label="First page">
+            <i class="fa fa-angle-double-left"></i>
+          </a>
+        </li>
+        
+        <!-- Previous Page -->
+        <li ng-class="{disabled: ctrl.currentPage === 1}">
+          <a href="#" ng-click="ctrl.previousPage()" aria-label="Previous page">
+            <i class="fa fa-angle-left"></i>
+          </a>
+        </li>
+        
+        <!-- Page Numbers -->
+        <li ng-repeat="page in ctrl.getPageNumbers()" 
+            ng-class="{active: page === ctrl.currentPage}">
+          <a href="#" ng-click="ctrl.goToPage(page)">{{ page }}</a>
+        </li>
+        
+        <!-- Next Page -->
+        <li ng-class="{disabled: ctrl.currentPage === ctrl.getTotalPages()}">
+          <a href="#" ng-click="ctrl.nextPage()" aria-label="Next page">
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        
+        <!-- Last Page -->
+        <li ng-class="{disabled: ctrl.currentPage === ctrl.getTotalPages()}">
+          <a href="#" ng-click="ctrl.goToPage(ctrl.getTotalPages())" aria-label="Last page">
+            <i class="fa fa-angle-double-right"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

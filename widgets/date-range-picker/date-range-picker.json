@@ -1,0 +1,75 @@
+{
+  "id": "customDateRangePicker",
+  "name": "Date Range Picker",
+  "description": "A widget for selecting date ranges with an intuitive calendar interface",
+  "type": "widget",
+  "template": "@date-range-picker.html",
+  "controller": "@date-range-picker.js",
+  "custom": true,
+  "properties": [
+    {
+      "label": "Start Date",
+      "name": "startDate",
+      "type": "variable",
+      "help": "Variable to store the selected start date"
+    },
+    {
+      "label": "End Date",
+      "name": "endDate",
+      "type": "variable",
+      "help": "Variable to store the selected end date"
+    },
+    {
+      "label": "Date Format",
+      "name": "dateFormat",
+      "type": "choice",
+      "defaultValue": "yyyy-MM-dd",
+      "choiceValues": [
+        "yyyy-MM-dd",
+        "dd/MM/yyyy",
+        "MM/dd/yyyy",
+        "dd-MM-yyyy"
+      ],
+      "help": "Format for displaying dates"
+    },
+    {
+      "label": "Placeholder Text",
+      "name": "placeholder",
+      "type": "text",
+      "defaultValue": "Select date range",
+      "help": "Placeholder text when no date is selected"
+    },
+    {
+      "label": "Min Date",
+      "name": "minDate",
+      "type": "text",
+      "help": "Minimum selectable date (YYYY-MM-DD format)"
+    },
+    {
+      "label": "Max Date",
+      "name": "maxDate",
+      "type": "text",
+      "help": "Maximum selectable date (YYYY-MM-DD format)"
+    },
+    {
+      "label": "Required",
+      "name": "required",
+      "type": "boolean",
+      "defaultValue": false,
+      "help": "Make the date range selection mandatory"
+    },
+    {
+      "label": "Disabled",
+      "name": "disabled",
+      "type": "boolean",
+      "defaultValue": false,
+      "help": "Disable the date range picker"
+    },
+    {
+      "label": "CSS Classes",
+      "name": "cssClasses",
+      "type": "text",
+      "help": "Additional CSS classes to apply to the widget"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "id": "customAdvancedDataTable",
+  "name": "Advanced Data Table",
+  "description": "A feature-rich data table with sorting, filtering, pagination, and export capabilities",
+  "type": "widget",
+  "template": "@advanced-data-table.html",
+  "controller": "@advanced-data-table.js",
+  "custom": true,
+  "properties": [
+    {
+      "label": "Data Source",
+      "name": "dataSource",
+      "type": "variable",
+      "help": "Array of objects to display in the table"
+    },
+    {
+      "label": "Columns Configuration",
+      "name": "columns",
+      "type": "variable",
+      "help": "Array defining column properties: [{key: 'field', label: 'Display Name', sortable: true, type: 'text'}]"
+    },
+    {
+      "label": "Items Per Page",
+      "name": "itemsPerPage",
+      "type": "integer",
+      "defaultValue": 10,
+      "help": "Number of items to display per page"
+    },
+    {
+      "label": "Enable Search",
+      "name": "enableSearch",
+      "type": "boolean",
+      "defaultValue": true,
+      "help": "Enable global search functionality"
+    },
+    {
+      "label": "Enable Export",
+      "name": "enableExport",
+      "type": "boolean",
+      "defaultValue": true,
+      "help": "Enable CSV export functionality"
+    },
+    {
+      "label": "Enable Selection",
+      "name": "enableSelection",
+      "type": "boolean",
+      "defaultValue": false,
+      "help": "Enable row selection with checkboxes"
+    },
+    {
+      "label": "Selected Items",
+      "name": "selectedItems",
+      "type": "variable",
+      "help": "Array to store selected items (when selection is enabled)"
+    },
+    {
+      "label": "Show Row Numbers",
+      "name": "showRowNumbers",
+      "type": "boolean",
+      "defaultValue": false,
+      "help": "Display row numbers in the first column"
+    },
+    {
+      "label": "Striped Rows",
+      "name": "stripedRows",
+      "type": "boolean",
+      "defaultValue": true,
+      "help": "Alternate row background colors"
+    },
+    {
+      "label": "Hover Effect",
+      "name": "hoverEffect",
+      "type": "boolean",
+      "defaultValue": true,
+      "help": "Highlight rows on hover"
+    },
+    {
+      "label": "Compact Mode",
+      "name": "compactMode",
+      "type": "boolean",
+      "defaultValue": false,
+      "help": "Reduce padding for a more compact table"
+    },
+    {
+      "label": "Loading State",
+      "name": "isLoading",
+      "type": "boolean",
+      "defaultValue": false,
+      "help": "Show loading spinner when data is being fetched"
+    },
+    {
+      "label": "Empty Message",
+      "name": "emptyMessage",
+      "type": "text",
+      "defaultValue": "No data available",
+      "help": "Message to display when there's no data"
+    },
+    {
+      "label": "CSS Classes",
+      "name": "cssClasses",
+      "type": "text",
+      "help": "Additional CSS classes to apply to the widget"
+    }
+  ]
+}
